@@ -2,16 +2,16 @@
 filetype off
 filetype plugin indent off
 
-set nocompatible
 
 "---------------------------
 " plugin manage
 "---------------------------
 "NeoBundle
 if has('vim_starting')
+	set nocompatible
 	set runtimepath+=~/.vim/bundle/neobundle.vim
-	call neobundle#rc(expand('~/.vim/bundle'))
 endif
+call neobundle#rc(expand('~/.vim/bundle/'))
 
 "Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -47,10 +47,43 @@ NeoBundle 'mrkn/mrkn256.vim'
 "pyte
 NeoBundle 'therubymug/vim-pyte'
 
+NeoBundle 'Shougo/unite.vim'
 "colorscheme一覧表示
 "Unite.vim (:Unite colorscheme -auto-preview)
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
+" Unite.vimで最近使ったファイルを表示できるようにする
+NeoBundle 'Shougo/neomru.vim'
+
+""""""""""""""""""""""""""
+" Unite.vimの設定
+""""""""""""""""""""""""""
+" 入力モードで開始する
+let g:unite_enable_start_insert=1
+" バッファ一覧
+noremap <C-P> :Unite buffer<CR>
+" ファイル一覧
+noremap <C-F> :Unite -buffer-name=file file<CR>
+" 最近使ったファイルの一覧
+noremap <C-Z> :Unite file_mru<CR>
+" sourcesを「今開いているファイルのディレクトリとする」
+noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+" ESCキーを２回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+""""""""""""""""""""""""""
+
+" ファイルをtree表示してくれる
+NeoBundle 'scrooloose/nerdtree'
+
+
+"vim-powerline
+NeoBundle 'Lokaltog/vim-powerline'
 
 "------------------------------
 " input
@@ -63,6 +96,10 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'itchyny/lightline.vim'
 "HTMLタグなどの囲まれているものの編集補助
 NeoBundle 'surround.vim'
+"シンタックスチェックプラグイン
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
 
 " Disable AutoComplePop.
 let g:acp_enableAtStartup = 0
@@ -88,7 +125,7 @@ let g:neocomplcache_dictionary_filetype_lists = {
 \ 'scala' : '~/.vim/dict/scala.dict',
 \ 'javascript' : '~/.vim/dict/javascript.dict',
 \ 'coffee' : '~/.vim/dict/javascript.dict',
-\ 'perl_base' : '~/.vim/dict/perl.dict',
+\ 'perl' : '~/.vim/dict/perl.dict',
 \ 'objective-c' : '~/.vim/dict/objc.dict',
 \ 'c' : '~/.vim/dict/c.dict',
 \ 'cpp' : '~/.vim/dict/cpp.dict',
@@ -140,6 +177,25 @@ NeoBundleLazy 'alpaca-tc/beautify.vim', {
 \    ]
 \  }
 \ }
+
+
+" Ruby向けにendを自動挿入してくれる
+NeoBundle 'tpope/vim-endwise'
+
+" コメントのON/OFFを手軽に実行(Ctrl + -を２回)
+NeoBundle 'tomtom/tcomment_vim'
+
+" インデントに色をつけて見やすくする
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+" vimを立ち上げたときに自動的にvim-indent-guidesをオンにする
+let g:indent_guides_enable_on_vim_startup = 1
+
+" ログファイルを色付けしてくれる
+NeoBundle 'vim-scripts/AnsiEsc.vim'
+
+" 行末の半角スペースを可視化
+NeoBundle 'bronson/vim-trailing-whitespace'
 
 
 "---------------------------
@@ -225,8 +281,13 @@ autocmd WinLeave * setlocal nocursorline
 "---indent---
 "オートインデントを有効にする
 set autoindent
+" 改行時に入力された行の末尾に合わせて次のインデントを増幅する
+set smartindent
 "タブが対応する空白の数
 set tabstop=4
+"タブ入力を複数の空白入力に置き換える
+set expandtab
+
 
 "---emmet---
 "ctrl + e で展開
