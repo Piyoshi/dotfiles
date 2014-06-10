@@ -9,6 +9,7 @@ filetype plugin indent off
 "NeoBundle
 if has('vim_starting')
 	set nocompatible
+    let g:neobundle_default_git_protocol='git'
 	set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 call neobundle#rc(expand('~/.vim/bundle/'))
