@@ -81,6 +81,8 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 " ファイルをtree表示してくれる
 NeoBundle 'scrooloose/nerdtree'
+" tree表示をノーマルモードのShift + t にマッピングする
+nmap <silent> <S-T> :NERDTreeToggle<CR>
 
 
 "vim-powerline
