@@ -97,6 +97,10 @@ NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 "ステータスライン表示をおしゃれに
 NeoBundle 'itchyny/lightline.vim'
+" let g:lightline = {
+"     \ 'colorscheme': 'solarized'
+"     \}
+
 "HTMLタグなどの囲まれているものの編集補助
 NeoBundle 'surround.vim'
 "シンタックスチェックプラグイン
@@ -190,9 +194,18 @@ NeoBundle 'tomtom/tcomment_vim'
 
 " インデントに色をつけて見やすくする
 NeoBundle 'nathanaelkane/vim-indent-guides'
-
 " vimを立ち上げたときに自動的にvim-indent-guidesをオンにする
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level=1
+" let g:indent_guides_color_change_percent=30
+autocmd VimEnter,ColorScheme * : highlight CorsorLine cterm=underline ctermbg=234
+autocmd VimEnter,Colorscheme * : highlight IndentGuidesOdd  ctermbg=12
+autocmd VimEnter,Colorscheme * : highlight IndentGuidesEven ctermbg=240
+" set background=dark
+let g:indent_guides_guide_size=1
+"let g:indent_guides_guide_size=&tabstop
+
 
 " ログファイルを色付けしてくれる
 NeoBundle 'vim-scripts/AnsiEsc.vim'
@@ -258,7 +271,7 @@ set showcmd
 set showmatch
 
 "コマンドラインの高さ
-set cmdheight=2
+set cmdheight=1
 set laststatus=2
 
 "コメント文の色を変更
@@ -288,6 +301,8 @@ set autoindent
 set smartindent
 "タブが対応する空白の数
 set tabstop=4
+set softtabstop=4
+" set shiftwidth=4
 "タブ入力を複数の空白入力に置き換える
 set expandtab
 
