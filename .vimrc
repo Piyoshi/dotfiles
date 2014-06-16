@@ -8,9 +8,9 @@ filetype plugin indent off
 "---------------------------
 "NeoBundle
 if has('vim_starting')
-	set nocompatible
+    set nocompatible
     let g:neobundle_default_git_protocol='git'
-	set runtimepath+=~/.vim/bundle/neobundle.vim
+    set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 call neobundle#rc(expand('~/.vim/bundle/'))
 
@@ -199,9 +199,9 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level=1
 " let g:indent_guides_color_change_percent=30
-autocmd VimEnter,ColorScheme * : highlight CorsorLine cterm=underline ctermbg=234
-autocmd VimEnter,Colorscheme * : highlight IndentGuidesOdd  ctermbg=12
-autocmd VimEnter,Colorscheme * : highlight IndentGuidesEven ctermbg=240
+autocmd VimEnter,Colorscheme * :hi CorsorLine cterm=underline ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=12
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240
 " set background=dark
 let g:indent_guides_guide_size=1
 "let g:indent_guides_guide_size=&tabstop
@@ -218,16 +218,16 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 "base setting
 "---------------------------
 "カラースキーマを設定
-colorscheme desert
+colorscheme koehler
 
 "カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 "Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_runnning")
-	"シンタックスハイライトを有効にする
-	syntax enable 
-	"検索結果の文字列のハイライトを有効にする
-	set hlsearch
+    "シンタックスハイライトを有効にする
+    syntax enable 
+    "検索結果の文字列のハイライトを有効にする
+    set hlsearch
 endif
 
 "<Space>.を押せば.vimrcが開くようにする
