@@ -306,6 +306,8 @@ set softtabstop=4
 "タブ入力を複数の空白入力に置き換える
 set expandtab
 
+set noswapfile
+
 
 "---emmet---
 "ctrl + e で展開
