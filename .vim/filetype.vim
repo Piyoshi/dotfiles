@@ -13,6 +13,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.html        setfiletype html
     au BufNewFile,BufRead *.coffee      setfiletype coffee
     au BufNewFile,BufRead *.css         setfiletype css
+    au BufNewFile,BufRead *.scss        setfiletype scss
     au BufNewFile,BufRead *.java        setfiletype java
     au BufNewFile,BufRead *.js          setfiletype javascript
 augroup END
