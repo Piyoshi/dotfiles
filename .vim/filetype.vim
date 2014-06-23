@@ -16,4 +16,5 @@ augroup filetypedetect
     au BufNewFile,BufRead *.scss        setfiletype scss
     au BufNewFile,BufRead *.java        setfiletype java
     au BufNewFile,BufRead *.js          setfiletype javascript
+    au BufNewFile,BufRead *.md          setfiletype markdown
 augroup END
