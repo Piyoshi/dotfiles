@@ -213,6 +213,14 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 " 行末の半角スペースを可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
 
+" Markdownの環境
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+
+" .mdのファイルに対してハイライトを適用する
+au BufRead,BufNewFile *.md set filetype=markdown 
+
 
 "---------------------------
 "base setting
