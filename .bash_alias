@@ -1,0 +1,12 @@
+" Mac OS
+alias ls='ls -G'
+" Cygwin, CentOS
+"alias ls='ls --color=auto'
+
+alias ll='ls -l'
+alias la='ls -a'
+alias grep='grep --color'
+alias tree='tree -C'
+alias gittree="git log --graph --pretty='format:%C(yellow)%h%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset'"
+
+
