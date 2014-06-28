@@ -1,7 +1,7 @@
-" Mac OS
+# Mac OS
 alias ls='ls -G'
-" Cygwin, CentOS
-"alias ls='ls --color=auto'
+# Cygwin, CentOS
+#alias ls='ls --color=auto'
 
 alias ll='ls -l'
 alias la='ls -a'
