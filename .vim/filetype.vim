@@ -12,6 +12,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.perl        setfiletype perl
     au BufNewFile,BufRead *.html        setfiletype html
     au BufNewFile,BufRead *.coffee      setfiletype coffee
+    au BufNewFile,BufRead *.yml         setfiletype yaml
     au BufNewFile,BufRead *.css         setfiletype css
     au BufNewFile,BufRead *.scss        setfiletype scss
     au BufNewFile,BufRead *.java        setfiletype java
