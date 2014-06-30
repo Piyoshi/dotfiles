@@ -218,9 +218,6 @@ NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 
-" .mdのファイルに対してハイライトを適用する
-au BufRead,BufNewFile *.md set filetype=markdown 
-
 
 "---------------------------
 "base setting
