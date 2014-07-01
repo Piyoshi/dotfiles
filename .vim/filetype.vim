@@ -11,6 +11,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.php         setfiletype php
     au BufNewFile,BufRead *.perl        setfiletype perl
     au BufNewFile,BufRead *.html        setfiletype html
+    au BufNewFile,BufRead *.vim         setfiletype vim
     au BufNewFile,BufRead *.coffee      setfiletype coffee
     au BufNewFile,BufRead *.yml         setfiletype yaml
     au BufNewFile,BufRead *.css         setfiletype css
