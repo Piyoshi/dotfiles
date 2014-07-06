@@ -7,6 +7,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.cuda        setfiletype cuda
     au BufNewFile,BufRead *.cpp         setfiletype cpp
     au BufNewFile,BufRead *.rb          setfiletype ruby
+    au BufNewFile,BufRead *.erb         setfiletype eruby
     au BufNewFile,BufRead *.py          setfiletype python
     au BufNewFile,BufRead *.php         setfiletype php
     au BufNewFile,BufRead *.perl        setfiletype perl
