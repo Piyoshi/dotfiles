@@ -1,1 +1,1 @@
-colorscheme hybrid
+colorscheme molokai
