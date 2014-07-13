@@ -215,6 +215,7 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 " 行末の半角スペースを可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
 
+
 " Markdownの環境
 "NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'kannokanno/previm'
@@ -228,6 +229,13 @@ NeoBundle 'hail2u/vim-css3-syntax'
 
 " SCSS
 NeoBundle 'cakebaker/scss-syntax.vim'
+
+" JavaScript
+" インデントをそろえる
+NeoBundle 'jiangmiao/simple-javascript-indenter'
+let g:SimpleJsIntenter_CaseIndnetLEvel = -1
+" シンタックスハイライト
+NeoBundle 'jelera/vim-javascript-syntax'
 
 
 "---------------------------
