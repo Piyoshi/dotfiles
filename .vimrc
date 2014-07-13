@@ -220,6 +220,15 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'tyru/open-browser.vim'
 
+" HTML5
+NeoBundle 'othree/html5.vim'
+
+" CSS3
+NeoBundle 'hail2u/vim-css3-syntax'
+
+" SCSS
+NeoBundle 'cakebaker/scss-syntax.vim'
+
 
 "---------------------------
 "base setting
