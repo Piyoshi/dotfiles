@@ -1,0 +1,43 @@
+{
+    "color_scheme": "Packages/Monokai Extended/Monokai Extended.tmTheme",
+    "font_size": 14,
+    "ignored_packages":
+    [
+    ],
+    "vintage_ctrl_keys": true,
+    "vintage_start_in_command_mode": true,
+    // サイドバーのフォルダを太文字にする
+    "bold_folder_labels": true,
+    // 起動時に新規ウィンドウを開く
+    "create_window_at_startup": true,
+    // デフォルトのエンコード
+    "default_encoding": "UTF-8",
+    // エンコーディングを表示
+    "show_encoding": true,
+    // インデントの補助線を描画
+    "draw_indent_guides": true,
+    // インデントの補助線のオプション
+    "indent_guides_options": [
+        "draw_active"
+    ],
+    // 行の余白
+    "line_padding_top": 4,
+    "line_padding_bottom": 4,
+    // 括弧の強調表示
+    "match_brackets_angle": true,
+    "match_bracktes_content": true,
+    "match_bracktes_braces": true,
+    "match_bracktes_square": true,
+    // ファイルの先頭行と再終業における上下移動の振る舞い
+    "move_to_limit_on_up_down": true,
+    "scroll_past_end": true,
+    // Shift+Tabでインデントを減らすherasuherasu
+    "shift_tab_unindent": true,
+    // タブをスペースに変換
+    "translate_tabs_to_spaces": true,
+    // テキストの折り返しorikaesi
+    "word_wrap": true,
+    // 折り返し幅（0はウィンドウサイズ）
+    "wrap_width": 0,
+    "show_full_path": true
+}
