@@ -230,6 +230,12 @@ NeoBundle 'hail2u/vim-css3-syntax'
 " SCSS
 NeoBundle 'cakebaker/scss-syntax.vim'
 
+" LESS
+NeoBundle 'groenewege/vim-less'
+
+" Coffee Script
+NeoBundle 'kchmck/vim-coffee-script'
+
 " JavaScript
 " インデントをそろえる
 NeoBundle 'jiangmiao/simple-javascript-indenter'
