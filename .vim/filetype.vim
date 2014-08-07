@@ -19,6 +19,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.yml         setfiletype yaml
     au BufNewFile,BufRead *.css         setfiletype css
     au BufNewFile,BufRead *.scss        setfiletype scss
+    au BUfNewFile,BufRead *.less        setfiletype less
     au BufNewFile,BufRead *.java        setfiletype java
     au BufNewFile,BufRead *.js          setfiletype javascript
     au BufNewFile,BufRead *.md          setfiletype markdown
