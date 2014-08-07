@@ -6,6 +6,7 @@
     ],
     "vintage_ctrl_keys": true,
     "vintage_start_in_command_mode": true,
+    "vintage_clipboard": true,
     // サイドバーのフォルダを太文字にする
     "bold_folder_labels": true,
     // 起動時に新規ウィンドウを開く
