@@ -22,5 +22,6 @@ augroup filetypedetect
     au BUfNewFile,BufRead *.less        setfiletype less
     au BufNewFile,BufRead *.java        setfiletype java
     au BufNewFile,BufRead *.js          setfiletype javascript
+    au BufNewFile,BufRead *.json        setfiletype json
     au BufNewFile,BufRead *.md          setfiletype markdown
 augroup END
