@@ -215,6 +215,9 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 " 行末の半角スペースを可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
 
+" 色のプレビューを表示
+NeoBundle 'gorodinskiy/vim-coloresque'
+
 
 " Markdownの環境
 "NeoBundle 'plasticboy/vim-markdown'
