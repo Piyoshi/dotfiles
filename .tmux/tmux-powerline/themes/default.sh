@@ -29,10 +29,12 @@ if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 		"hostname 234 255" \
 		#"ifstat 30 255" \
 		#"ifstat_sys 30 255" \
+		"ifstat_sys 22 80" \
+		#"lan_ip 22 80" \
 		"lan_ip 19 255" \
 		# "lan_ip 24 255 ${TMUX_POWERLINE_SEPARATOR_RIGHT_THIN}" \
-		# "wan_ip 24 255" \
-		"vcs_branch 130 232" \
+		#"wan_ip 24 255" \
+		#"vcs_branch 130 232" \
 		# "vcs_branch 22 135" \
 		# "vcs_compare 16 255" \
 		# "vcs_staged 18 250" \
@@ -46,14 +48,15 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 		#"earthquake 3 0" \
 		#"pwd 89 211" \
 		"pwd 54 211" \
+		"vcs_branch 130 232" \
 		#"mailcount 9 255" \
-		"now_playing 234 37" \
+		#"now_playing 234 37" \
 		#"cpu 240 136" \
 		"load 234 3" \
 		# "load 237 167" \
 		#"tmux_mem_cpu_load 234 136" \
 		#"battery 137 127" \
-		"battery 22 80" \
+		#"battery 22 80" \
 		#"weather 37 255" \
 		#"rainbarf 0 0" \
 		# "xkb_layout 125 117" \
