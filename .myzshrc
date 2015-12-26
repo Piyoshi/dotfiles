@@ -21,6 +21,20 @@ function install_powerline_precmd() {
 }
 install_powerline_precmd
 
+# VCS情報を取得するzshの便利関数vcs_infoを使う
+autoload -Uz vcs_info
+
+# branch情報の表示フォーマットの指定
+# %b ブランチ情報
+# %a アクション名(mergeなど)
+zstyle ':vcs_info:*' formats '[%b]'
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () {
+        psvar=()
+        LANG=en_US.UTF-8 vcs_info
+        [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+
 
 # 名前で色を付けるようにする
 autoload colors
@@ -33,7 +47,12 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33;ex=31;bd=46;34;cd=43;34;su=41;30:sb=46
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 autoload -U compinit
-compinit
+compinit -u#
+# 補完候補の大文字小文字の区別なしに表示する（ただし大文字の補完は大文字の候補にマッチ）
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+# 補完候補に色づけする
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# 補完候補を十字キーで選択
 zstyle ':completion:*:default' menu select=2
 
 
@@ -68,13 +87,20 @@ export CATALINA_HOME="$HOME/MyResources/Tomcat/7.0/apache-tomcat-7.0.53"
 export CLASSPATH="${CATALINA_HOME}/lib"
 export DERBY_HOME="${JAVA_HOME}/db"
 
-PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+#PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 # PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+#PROMPT=$'%{\e[38;5;126m%}%m%(!.#.$) %{\e[38;5;25m%}%n%{\e[m%}%{\e[38;5;243m%}:%~ $ '
+PROMPT=$'%{\e[38;5;126m%}Date(%D) %{\e[38;5;160m%}%(!.#.>) %{\e[38;5;25m%}%n%{\e[m%}%{\e[38;5;243m%}:%~ $ '
+PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
+SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
+RPROMPT="%1(v|%F{yellow}%1v%f|) %{$fg[white]%}[%*]%{$reset_color%}"
 
 PATH=/usr/texbin:$PATH
 
 export LDFLAGS="-L/usr/local/opt/freetype/lib"
+# export LDFLAGS="-L/usr/local/opt/freetype/lib -L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/freetype/include"
+# export LDFLAGS="-I/usr/local/opt/freetype/include -I/usr/local/opt/openssl/include"
 
 
 export PHPBREW_SET_PROMPT=1

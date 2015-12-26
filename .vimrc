@@ -8,11 +8,13 @@ filetype plugin indent off
 "---------------------------
 "NeoBundle
 if has('vim_starting')
+  if &compatible
     set nocompatible
+  endif
     let g:neobundle_default_git_protocol='git'
     set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 "Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -49,6 +51,8 @@ NeoBundle 'croaker/mustang-vim'
 NeoBundle 'mrkn/mrkn256.vim'
 "pyte
 NeoBundle 'therubymug/vim-pyte'
+"landscape
+NeoBundle 'itchyny/landscape.vim'
 
 NeoBundle 'Shougo/unite.vim'
 "colorscheme一覧表示
@@ -88,7 +92,7 @@ nmap <silent> <S-T> :NERDTreeToggle<CR>
 
 
 "vim-powerline
-NeoBundle 'Lokaltog/vim-powerline'
+"NeoBundle 'Lokaltog/vim-powerline'
 
 "------------------------------
 " input
@@ -97,11 +101,17 @@ NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/neocomplcache'
 "スニペット入力サポート
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 "ステータスライン表示をおしゃれに
 NeoBundle 'itchyny/lightline.vim'
-" let g:lightline = {
-"     \ 'colorscheme': 'solarized'
-"     \}
+let g:lightline = {
+      \ 'colorscheme': 'landscape',
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \ },
+      \ 'separator': {'left': '⮀', 'right': '⮂'},
+      \ 'subseparator': {'left': '⮁', 'right': '⮃'}
+      \}
 
 "HTMLタグなどの囲まれているものの編集補助
 NeoBundle 'surround.vim'
@@ -236,8 +246,14 @@ NeoBundle 'cakebaker/scss-syntax.vim'
 " LESS
 NeoBundle 'groenewege/vim-less'
 
+" Elixir
+NeoBundle 'elixir-lang/vim-elixir'
+
 " Coffee Script
 NeoBundle 'kchmck/vim-coffee-script'
+
+" Io
+NeoBundle 'andreimaxim/vim-io'
 
 " JavaScript
 " インデントをそろえる
@@ -258,6 +274,13 @@ NeoBundle 'elzr/vim-json'
 "   endif
 "   execute '%! jq 95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;' . l:arg . '95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;'
 " endfunction
+
+"--------------------------
+" Other
+"--------------------------
+NeoBundle 'sudo.vim'
+
+call neobundle#end()
 
 "---------------------------
 "base setting

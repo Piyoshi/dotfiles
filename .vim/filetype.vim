@@ -4,6 +4,7 @@ endif
 augroup filetypedetect
     " ファイルの拡張しごとにタブ幅を設定
     au BufNewFile,BufRead *.c           setfiletype c
+    au BufNewFile,BufRead *.ino         setfiletype c
     au BufNewFile,BufRead *.cuda        setfiletype cuda
     au BufNewFile,BufRead *.cpp         setfiletype cpp
     au BufNewFile,BufRead *.rb          setfiletype ruby
