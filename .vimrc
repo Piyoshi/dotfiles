@@ -91,9 +91,6 @@ NeoBundle 'scrooloose/nerdtree'
 nmap <silent> <S-T> :NERDTreeToggle<CR>
 
 
-"vim-powerline
-"NeoBundle 'Lokaltog/vim-powerline'
-
 "------------------------------
 " input
 "------------------------------
@@ -313,10 +310,6 @@ set ambiwidth=double
 "コマンドライン保管するときに強化されたものを使う
 set wildmenu
 
-"クリップボードを共有
-set clipboard+=unnamed
-set clipboard=unnamed
-
 "Visual blockモードでフリーカーソルを有効にする
 set virtualedit=block
 
@@ -358,6 +351,12 @@ set cursorline
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
+"モード毎にカーソルを変形
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[2 q"
+let &t_te.="\e[1 q"
+
 "---------------------------
 "edit
 "---------------------------
@@ -370,7 +369,7 @@ set smartindent
 "タブが対応する空白の数
 set tabstop=4
 set softtabstop=4
-" set shiftwidth=4
+set shiftwidth=4
 "タブ入力を複数の空白入力に置き換える
 set expandtab
 
