@@ -26,4 +26,5 @@ augroup filetypedetect
     au BufNewFile,BufRead *.json        setfiletype json
     au BufNewFile,BufRead *.md          setfiletype markdown
     au BufNewFile,BufRead *.xml         setfiletype xml
+    au BufNewFile,BufRead *.io          setfiletype io
 augroup END

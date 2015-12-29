@@ -259,6 +259,9 @@ let g:SimpleJsIntenter_CaseIndnetLEvel = -1
 " シンタックスハイライト
 NeoBundle 'jelera/vim-javascript-syntax'
 
+" ES6
+NeoBundle 'isRuslan/vim-es6'
+
 " JSON
 NeoBundle 'elzr/vim-json'
 " Jqコマンドとの連携によるJSON整形
