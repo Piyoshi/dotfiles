@@ -6,281 +6,337 @@ filetype plugin indent off
 "---------------------------
 " plugin manage
 "---------------------------
-"NeoBundle
-if has('vim_starting')
-  if &compatible
+"dein.vim
+if &compatible
     set nocompatible
+endif
+set runtimepath+=~/.vim/repos/dein.vim
+
+if dein#load_state('~/.vim/dein')
+  call dein#begin(expand('~/.vim/dein'))
+
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+
+  "--------------------------
+  " color
+  "--------------------------
+  "colorscheme
+  "tomorrow-theme
+  call dein#add('chriskempson/vim-tomorrow-theme')
+  "hybrid
+  set background=dark
+  set background=dark
+  call dein#add('w0ng/vim-hybrid')
+  "jellybeans
+  call dein#add('nanotech/jellybeans.vim')
+  "twilight
+  call dein#add('vim-scripts/twilight')
+  "lucius##
+  call dein#add('jonathanfilip/vim-lucius')
+  "railscasts
+  call dein#add('jpo/vim-railscasts-theme')
+  "solarized
+  call dein#add('altercation/vim-colors-solarized')
+  "wombat
+  call dein#add('vim-scripts/Wombat')
+  "rdark
+  call dein#add('vim-scripts/rdark')
+  "zenburn
+  call dein#add('vim-scripts/Zenburn')
+  "molokai
+  call dein#add('tomasr/molokai')
+  "mustang
+  call dein#add('croaker/mustang-vim')
+  "mrkn256
+  call dein#add('mrkn/mrkn256.vim')
+  "pyte
+  call dein#add('therubymug/vim-pyte')
+  "landscape
+  call dein#add('itchyny/landscape.vim')
+
+  call dein#add('Shougo/unite.vim')
+  "colorscheme一覧表示
+  "Unite.vim (:Unite colorscheme -auto-preview)
+  call dein#add('ujihisa/unite-colorscheme')
+  " Unite.vimで最近使ったファイルを表示できるようにする
+  call dein#add('Shougo/neomru.vim')
+  """"""""""""""""""""""""""
+  " Unite.vimの設定
+  """"""""""""""""""""""""""
+  " 入力モードで開始する
+  let g:unite_enable_start_insert=1
+  " バッファ一覧
+  noremap <C-P> :Unite buffer<CR>
+  " ファイル一覧
+  noremap <C-F> :Unite -buffer-name=file file<CR>
+  " 最近使ったファイルの一覧
+  noremap <C-Z> :Unite file_mru<CR>
+  " sourcesを「今開いているファイルのディレクトリとする」
+  noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
+  " ウィンドウを分割して開く
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+  " ウィンドウを縦に分割して開く
+  au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+  " ESCキーを２回押すと終了する
+  au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+  au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+  """"""""""""""""""""""""""
+
+  " ファイルをtree表示してくれる
+  call dein#add('scrooloose/nerdtree')
+  " tree表示をノーマルモードのShift + t にマッピングする
+  nmap <silent> <S-T> :NERDTreeToggle<CR>
+
+  "------------------------------
+  " input
+  "------------------------------
+  "入力補完機能
+  call dein#add('Shougo/neocomplcache')
+  "スニペット入力サポート
+  call dein#add('Shougo/neosnippet')
+  call dein#add('Shougo/neosnippet-snippets')
+  "ステータスライン表示をおしゃれに
+  call dein#add('itchyny/lightline.vim')
+  let g:lightline = {
+        \ 'colorscheme': 'landscape',
+        \ 'component': {
+        \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+        \ },
+        \ 'separator': {'left': '\ue0b0', 'right': '\ue0b2'},
+        \ 'subseparator': {'left': '\ue0b1', 'right': '\ue0b3'}
+        \}
+
+  "HTMLタグなどの囲まれているものの編集補助
+  call dein#add('vim-scripts/surround.vim')
+  "シンタックスチェックプラグイン
+  call dein#add('scrooloose/syntastic')
+  let g:syntastic_enable_signs=1
+  let g:syntastic_auto_loc_list=2
+
+  " Disable AutoComplePop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplcache.
+  let g:neocomplcache_enable_at_startup = 1
+  " Use underbar completion.
+  let g:neocomplcache_enable_underbar_completion = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplcache_min_syntax_length = 3
+  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+  " Use smartcase.
+  let g:neocomplcache_enable_smart_case = 1
+  " Use camel case completion.
+  let g:neocomplcache_enable_camel_case_completion = 1
+
+  " Define dictionary.
+  let g:neocomplcache_dictionary_filetype_lists = {
+  \ 'default' : '',
+  \ 'ruby' : '~/.vim/dict/ruby.dict',
+  \ 'eruby' : '~/.vim/dict/ruby.dict',
+  \ 'java' : '~/.vim/dict/java.dict',
+  \ 'scala' : '~/.vim/dict/scala.dict',
+  \ 'javascript' : '~/.vim/dict/javascript.dict',
+  \ 'coffee' : '~/.vim/dict/javascript.dict',
+  \ 'perl' : '~/.vim/dict/perl.dict',
+  \ 'objective-c' : '~/.vim/dict/objc.dict',
+  \ 'c' : '~/.vim/dict/c.dict',
+  \ 'cpp' : '~/.vim/dict/cpp.dict',
+  \ 'scheme' : '~/.vim/dict/scheme.dict',
+  \ 'html' : '~/.vim/dict/html.dict',
+  \ 'css' : '~/.vim/dict/css.dict'
+  \ }
+
+  " Enable snipMate compatibility feature
+  let g:neosnippet#enable_snipmate_compatibility = 1
+
+  " Tell Neosnippet about the other snippets
+  let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets'
+
+  " Select with <TAB>
+  " <TAB>: completion.
+  "inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+  inoremap <expr><C-y> neocomplcache#close_popup()
+  inoremap <expr><C-h> neocomplcache#cancel_popup()
+
+  " Plugin key-mappings.
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+
+  " SuperTab like snippets behavior.
+  "imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+  imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+  " For snippet_complete maker.
+  if has('conceal')
+    set conceallevel=2 concealcursor=i
   endif
-    let g:neobundle_default_git_protocol='git'
-    set runtimepath+=~/.vim/bundle/neobundle.vim
-endif
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-"Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-"--------------------------
-" color
-"--------------------------
-"colorscheme
-"tomorrow-theme
-NeoBundle 'chriskempson/vim-tomorrow-theme'
-"hybrid
-NeoBundle 'w0ng/vim-hybrid'
-"jellybeans
-NeoBundle 'nanotech/jellybeans.vim'
-"twilight
-NeoBundle 'vim-scripts/twilight'
-"lucius
-NeoBundle 'jonathanfilip/vim-lucius'
-"railscasts
-NeoBundle 'jpo/vim-railscasts-theme'
-"solarized
-NeoBundle 'altercation/vim-colors-solarized'
-"wombat
-NeoBundle 'vim-scripts/Wombat'
-"rdark
-NeoBundle 'vim-scripts/rdark'
-"zenburn
-NeoBundle 'vim-scripts/Zenburn'
-"molokai
-NeoBundle 'tomasr/molokai'
-"mustang
-NeoBundle 'croaker/mustang-vim'
-"mrkn256
-NeoBundle 'mrkn/mrkn256.vim'
-"pyte
-NeoBundle 'therubymug/vim-pyte'
-"landscape
-NeoBundle 'itchyny/landscape.vim'
-
-NeoBundle 'Shougo/unite.vim'
-"colorscheme一覧表示
-"Unite.vim (:Unite colorscheme -auto-preview)
-NeoBundle 'ujihisa/unite-colorscheme'
-" Unite.vimで最近使ったファイルを表示できるようにする
-NeoBundle 'Shougo/neomru.vim'
-
-""""""""""""""""""""""""""
-" Unite.vimの設定
-""""""""""""""""""""""""""
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
-" バッファ一覧
-noremap <C-P> :Unite buffer<CR>
-" ファイル一覧
-noremap <C-F> :Unite -buffer-name=file file<CR>
-" 最近使ったファイルの一覧
-noremap <C-Z> :Unite file_mru<CR>
-" sourcesを「今開いているファイルのディレクトリとする」
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-" ウィンドウを分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" ウィンドウを縦に分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" ESCキーを２回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-""""""""""""""""""""""""""
-
-" ファイルをtree表示してくれる
-NeoBundle 'scrooloose/nerdtree'
-" tree表示をノーマルモードのShift + t にマッピングする
-nmap <silent> <S-T> :NERDTreeToggle<CR>
 
 
-"------------------------------
-" input
-"------------------------------
-"入力補完機能
-NeoBundle 'Shougo/neocomplcache'
-"スニペット入力サポート
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-"ステータスライン表示をおしゃれに
-NeoBundle 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'colorscheme': 'landscape',
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-      \ },
-      \ 'separator': {'left': '⮀', 'right': '⮂'},
-      \ 'subseparator': {'left': '⮁', 'right': '⮃'}
-      \}
+  ""---Beautify---
+  "":Beautifyで整形・変換を行う
+  "NeoBundleLazy 'alpaca-tc/beautify.vim', {
+  "\  'autoload' : {
+  "\    'commands' : [
+  "\      {
+  "\        'name' : 'Beautify',
+  "\        'complete' : 'customlist,beautify#complete_options'
+  "\      }
+  "\    ]
+  "\  }
+  "\ }
+  " Ruby向けにendを自動挿入してくれる
+  call dein#add('tpope/vim-endwise')
 
-"HTMLタグなどの囲まれているものの編集補助
-NeoBundle 'surround.vim'
-"シンタックスチェックプラグイン
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
+  " コメントのON/OFFを手軽に実行(Ctrl + -を２回)
+  call dein#add('tomtom/tcomment_vim')
 
-" Disable AutoComplePop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+  " ログファイルを色付けしてくれる
+  call dein#add('vim-scripts/AnsiEsc.vim')
 
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
+  " 行末の半角スペースを可視化
+  call dein#add('bronson/vim-trailing-whitespace')
 
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-\ 'default' : '',
-\ 'ruby' : '~/.vim/dict/ruby.dict',
-\ 'eruby' : '~/.vim/dict/ruby.dict',
-\ 'java' : '~/.vim/dict/java.dict',
-\ 'scala' : '~/.vim/dict/scala.dict',
-\ 'javascript' : '~/.vim/dict/javascript.dict',
-\ 'coffee' : '~/.vim/dict/javascript.dict',
-\ 'perl' : '~/.vim/dict/perl.dict',
-\ 'objective-c' : '~/.vim/dict/objc.dict',
-\ 'c' : '~/.vim/dict/c.dict',
-\ 'cpp' : '~/.vim/dict/cpp.dict',
-\ 'scheme' : '~/.vim/dict/scheme.dict',
-\ 'html' : '~/.vim/dict/html.dict',
-\ 'css' : '~/.vim/dict/css.dict'
-\ }
-
-" Enable snipMate compatibility feature
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets'
+  " 色のプレビューを表示
+  call dein#add('gorodinskiy/vim-coloresque')
 
 
-" Select with <TAB>
-" <TAB>: completion.
-"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplcache#close_popup()
-inoremap <expr><C-h> neocomplcache#cancel_popup()
+  " Markdownの環境
+  "call dein#add('plasticboy/vim-markdown')
+  call dein#add('kannokanno/previm')
+  call dein#add('tyru/open-browser.vim')
+  " HTML5
+  call dein#add('othree/html5.vim')
 
-" Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  " CSS3
+  call dein#add('hail2u/vim-css3-syntax')
 
-" SuperTab like snippets behavior.
-"imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  " SCSS
+  call dein#add('cakebaker/scss-syntax.vim')
 
-" For snippet_complete maker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
+  " LESS
+  call dein#add('groenewege/vim-less')
+
+  " Elixir
+  call dein#add('elixir-lang/vim-elixir')
+
+  " Coffee Script
+  call dein#add('kchmck/vim-coffee-script')
+
+  " Io
+  "call dein#add('andreimaxim/vim-io')
+
+  " JavaScript
+  " インデントをそろえる
+  call dein#add('jiangmiao/simple-javascript-indenter')
+  let g:SimpleJsIntenter_CaseIndnetLEvel = -1
+  " シンタックスハイライト
+  call dein#add('jelera/vim-javascript-syntax')
+
+  " ES6
+  call dein#add('isRuslan/vim-es6')
+  " JSON
+  call dein#add('elzr/vim-json')
+  " Jqコマンドとの連携によるJSON整形
+  " command! -nargs=? Jq call s:Jq(<f-args>)
+  " function! s:Jq(...)
+  "   if 0 == a:0
+  "     let l:arg = "."
+  "   else
+  "     let l:arg = a:l
+  "   endif
+  "   execute '%! jq 95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;' . l:arg . '95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;'
+  " endfunction
+
+  call dein#add('leafgarland/typescript-vim')
+
+  call dein#add('posva/vim-vue')
+  call dein#add('leafoftree/vim-vue-plugin')
+
+  call dein#add('rust-lang/rust.vim')
+
+  call dein#add('udalov/kotlin-vim')
+
+  "" インデントに色をつけて見やすくする
+  "call dein#add('nathanaelkane/vim-indent-guides')
+  "" vimを立ち上げたときに自動的にvim-indent-guidesをオンにする
+  "let g:indent_guides_enable_on_vim_startup=1
+  "let g:indent_guides_auto_colors=0
+  "let g:indent_guides_start_level=1
+  "" let g:indent_guides_color_change_percent=30
+  ""autocmd VimEnter,Colorscheme * :hi CorsorLine cterm=underline ctermbg=234
+  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=12
+  "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240
+  "set background=dark
+  "let g:indent_guides_guide_size=1
+  ""let g:indent_guides_guide_size=&tabstop
+
+
+
+  "--------------------------
+  " Other
+  "--------------------------
+  call dein#add('vim-scripts/sudo.vim')
+
+  call dein#end()
+  call dein#save_state()
 endif
 
 
-"---Beautify---
-":Beautifyで整形・変換を行う
-NeoBundleLazy 'alpaca-tc/beautify.vim', {
-\  'autoload' : {
-\    'commands' : [
-\      {
-\        'name' : 'Beautify',
-\        'complete' : 'customlist,beautify#complete_options'
-\      }
-\    ]
-\  }
-\ }
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
 
 
-" Ruby向けにendを自動挿入してくれる
-NeoBundle 'tpope/vim-endwise'
 
-" コメントのON/OFFを手軽に実行(Ctrl + -を２回)
-NeoBundle 'tomtom/tcomment_vim'
-
-" インデントに色をつけて見やすくする
-NeoBundle 'nathanaelkane/vim-indent-guides'
+" vim-indent-guides インデントに色をつけて見やすくする
 " vimを立ち上げたときに自動的にvim-indent-guidesをオンにする
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_auto_colors=0
 let g:indent_guides_start_level=1
 " let g:indent_guides_color_change_percent=30
 "autocmd VimEnter,Colorscheme * :hi CorsorLine cterm=underline ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=12
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240
-" set background=dark
 let g:indent_guides_guide_size=1
 "let g:indent_guides_guide_size=&tabstop
 
+""インデントを線で可視化
+"call dein#add('Yggdroot/indentLine')
 
-" ログファイルを色付けしてくれる
-NeoBundle 'vim-scripts/AnsiEsc.vim'
+"" Vim
+"let g:indentLine_color_term = 239
 
-" 行末の半角スペースを可視化
-NeoBundle 'bronson/vim-trailing-whitespace'
+"" GVim
+"let g:indentLine_color_gui = '#A4E57E'
 
-" 色のプレビューを表示
-NeoBundle 'gorodinskiy/vim-coloresque'
+"" none X terminal
+"let g:indentLine_color_tty_light = 7 " (default: 4)
+"let g:indentLine_color_dark = 1 " (default: 2)
+
+"" Background (Vim, GVim)
+"let g:indentLine_bgcolor_term = 202
+"let g:indentLine_bgcolor_gui = '#FF5F00'
+
+"let g:indentLine_char = 'c'
 
 
-" Markdownの環境
-"NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-
-" HTML5
-NeoBundle 'othree/html5.vim'
-
-" CSS3
-NeoBundle 'hail2u/vim-css3-syntax'
-
-" SCSS
-NeoBundle 'cakebaker/scss-syntax.vim'
-
-" LESS
-NeoBundle 'groenewege/vim-less'
-
-" Elixir
-NeoBundle 'elixir-lang/vim-elixir'
-
-" Coffee Script
-NeoBundle 'kchmck/vim-coffee-script'
-
-" Io
-NeoBundle 'andreimaxim/vim-io'
-
-" JavaScript
-" インデントをそろえる
-NeoBundle 'jiangmiao/simple-javascript-indenter'
-let g:SimpleJsIntenter_CaseIndnetLEvel = -1
-" シンタックスハイライト
-NeoBundle 'jelera/vim-javascript-syntax'
-
-" ES6
-NeoBundle 'isRuslan/vim-es6'
-
-" JSON
-NeoBundle 'elzr/vim-json'
-" Jqコマンドとの連携によるJSON整形
-" command! -nargs=? Jq call s:Jq(<f-args>)
-" function! s:Jq(...)
-"   if 0 == a:0
-"     let l:arg = "."
-"   else
-"     let l:arg = a:l
-"   endif
-"   execute '%! jq 95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;' . l:arg . '95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;'
-" endfunction
-
-"--------------------------
-" Other
-"--------------------------
-NeoBundle 'sudo.vim'
-
-call neobundle#end()
 
 "---------------------------
 "base setting
@@ -293,7 +349,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 "Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_runnning")
     "シンタックスハイライトを有効にする
-    syntax enable 
+    syntax enable
     "検索結果の文字列のハイライトを有効にする
     set hlsearch
 endif
@@ -389,8 +445,5 @@ let g:user_emmet_settings = {
 \ 'lang' : 'ja'
 \}
 
-
 "ファイルタイプ関連を有効にする
 filetype plugin indent on
-
-NeoBundleCheck
