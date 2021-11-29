@@ -1,0 +1,1 @@
+/Users/satopiyo/Resource/Vim/molokai/colors/molokai.vim
