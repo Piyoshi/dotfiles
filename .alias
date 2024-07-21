@@ -11,4 +11,6 @@ alias gitdecolog="git log --graph --oneline --decorate"
 alias gittree="git log --graph --pretty='format:%C(yellow)%h%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset'"
 alias svim="sudo vim"
 
-
+alias secretchrome="ls -l ${HOME}/Tmp/browser | wc -l | awk '{print $2}' | xargs -ISECRET_CHROME_NUM $SHELL -c \"echo 'SECRET_CHROME_NUM' && mkdir $HOME/Tmp/browser/SECRET_CHROME_NUM && open -na '/Applications/Google Chrome.app' --args --incognito --user-data-dir=${HOME}/Tmp/browser/SECRET_CHROME_NUM/\" "
+alias gdiff="git diff --no-index"
+alias ecal="env LC_TIME=C cal"

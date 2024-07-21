@@ -39,7 +39,7 @@ zstyle ':completion:*:default' menu select=2
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/satopiyo/.sdkman"
-[[ -s "/Users/satopiyo/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/satopiyo/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 
