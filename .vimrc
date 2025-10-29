@@ -15,18 +15,6 @@ set runtimepath+=~/.vim/repos/dein.vim
 if dein#load_state('~/.vim/dein')
   call dein#begin(expand('~/.vim/dein'))
 
-  " プラグインリストを収めた TOML ファイル
-  " 予め TOML ファイル（後述）を用意しておく
-  let g:rc_dir    = expand('~/.vim/rc')
-  let s:toml      = g:rc_dir . '/dein.toml'
-  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
-
-
-  " TOML を読み込み、キャッシュしておく
-  call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-
   "--------------------------
   " color
   "--------------------------
@@ -34,14 +22,12 @@ if dein#load_state('~/.vim/dein')
   "tomorrow-theme
   call dein#add('chriskempson/vim-tomorrow-theme')
   "hybrid
-  set background=dark
-  set background=dark
   call dein#add('w0ng/vim-hybrid')
   "jellybeans
   call dein#add('nanotech/jellybeans.vim')
   "twilight
   call dein#add('vim-scripts/twilight')
-  "lucius##
+  "lucius
   call dein#add('jonathanfilip/vim-lucius')
   "railscasts
   call dein#add('jpo/vim-railscasts-theme')
@@ -114,8 +100,8 @@ if dein#load_state('~/.vim/dein')
         \ 'component': {
         \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
         \ },
-        \ 'separator': {'left': '\ue0b0', 'right': '\ue0b2'},
-        \ 'subseparator': {'left': '\ue0b1', 'right': '\ue0b3'}
+        \ 'separator': {'left': '⮀', 'right': '⮂'},
+        \ 'subseparator': {'left': '⮁', 'right': '⮃'}
         \}
 
   "HTMLタグなどの囲まれているものの編集補助
@@ -206,6 +192,21 @@ if dein#load_state('~/.vim/dein')
   " コメントのON/OFFを手軽に実行(Ctrl + -を２回)
   call dein#add('tomtom/tcomment_vim')
 
+  " インデントに色をつけて見やすくする
+  call dein#add('nathanaelkane/vim-indent-guides')
+  " vimを立ち上げたときに自動的にvim-indent-guidesをオンにする
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_auto_colors = 0
+  let g:indent_guides_start_level=1
+  " let g:indent_guides_color_change_percent=30
+  "autocmd VimEnter,Colorscheme * :hi CorsorLine cterm=underline ctermbg=234
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=12
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240
+  " set background=dark
+  let g:indent_guides_guide_size=1
+  "let g:indent_guides_guide_size=&tabstop
+
+
   " ログファイルを色付けしてくれる
   call dein#add('vim-scripts/AnsiEsc.vim')
 
@@ -238,8 +239,6 @@ if dein#load_state('~/.vim/dein')
   " Coffee Script
   call dein#add('kchmck/vim-coffee-script')
 
-  " Io
-  "call dein#add('andreimaxim/vim-io')
 
   " JavaScript
   " インデントをそろえる
@@ -250,6 +249,8 @@ if dein#load_state('~/.vim/dein')
 
   " ES6
   call dein#add('isRuslan/vim-es6')
+  " Astro
+  call dein#add('wuelnerdotexe/vim-astro')
   " JSON
   call dein#add('elzr/vim-json')
   " Jqコマンドとの連携によるJSON整形
@@ -263,30 +264,9 @@ if dein#load_state('~/.vim/dein')
   "   execute '%! jq 95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;' . l:arg . '95fe1a73-e2e2-4737-bea1-a44257c50fc8quot;'
   " endfunction
 
-  call dein#add('leafgarland/typescript-vim')
-
-  call dein#add('posva/vim-vue')
-  call dein#add('leafoftree/vim-vue-plugin')
-
-  call dein#add('rust-lang/rust.vim')
-
-  call dein#add('udalov/kotlin-vim')
-
-  "" インデントに色をつけて見やすくする
-  "call dein#add('nathanaelkane/vim-indent-guides')
-  "" vimを立ち上げたときに自動的にvim-indent-guidesをオンにする
-  "let g:indent_guides_enable_on_vim_startup=1
-  "let g:indent_guides_auto_colors=0
-  "let g:indent_guides_start_level=1
-  "" let g:indent_guides_color_change_percent=30
-  ""autocmd VimEnter,Colorscheme * :hi CorsorLine cterm=underline ctermbg=234
-  "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=12
-  "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240
-  "set background=dark
-  "let g:indent_guides_guide_size=1
-  ""let g:indent_guides_guide_size=&tabstop
-
-
+  " CSV
+  "call dein#add('chrisbra/csv.vim')
+  call dein#add('mechatroner/rainbow_csv')
 
   "--------------------------
   " Other
@@ -297,48 +277,7 @@ if dein#load_state('~/.vim/dein')
   call dein#save_state()
 endif
 
-
-" もし、未インストールものものがあったらインストール
-if dein#check_install()
-  call dein#install()
-endif
-
-
-
-" vim-indent-guides インデントに色をつけて見やすくする
-" vimを立ち上げたときに自動的にvim-indent-guidesをオンにする
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_auto_colors=0
-let g:indent_guides_start_level=1
-" let g:indent_guides_color_change_percent=30
-"autocmd VimEnter,Colorscheme * :hi CorsorLine cterm=underline ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=12
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240
-let g:indent_guides_guide_size=1
-"let g:indent_guides_guide_size=&tabstop
-
-""インデントを線で可視化
-"call dein#add('Yggdroot/indentLine')
-
-"" Vim
-"let g:indentLine_color_term = 239
-
-"" GVim
-"let g:indentLine_color_gui = '#A4E57E'
-
-"" none X terminal
-"let g:indentLine_color_tty_light = 7 " (default: 4)
-"let g:indentLine_color_dark = 1 " (default: 2)
-
-"" Background (Vim, GVim)
-"let g:indentLine_bgcolor_term = 202
-"let g:indentLine_bgcolor_gui = '#FF5F00'
-
-"let g:indentLine_char = 'c'
-
-
-
-"---------------------------
+"---------------------------                                                                                                                                                                                                          [65/347]
 "base setting
 "---------------------------
 "カラースキーマを設定
@@ -371,7 +310,6 @@ set wildmenu
 
 "Visual blockモードでフリーカーソルを有効にする
 set virtualedit=block
-
 "--------------------------
 "display
 "--------------------------
@@ -444,6 +382,14 @@ let g:user_emmet_settings = {
 \ 'indentation' : '  ',
 \ 'lang' : 'ja'
 \}
+
+
+"---json---
+let g:vim_json_syntax_conceal = 0
+
+"---astro---
+let g:astro_typescript = 'enable'
+"let g:astro_stylus = 'enable'
 
 "ファイルタイプ関連を有効にする
 filetype plugin indent on
