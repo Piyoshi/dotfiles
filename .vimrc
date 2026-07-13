@@ -6,14 +6,29 @@ filetype plugin indent off
 "---------------------------
 " plugin manage
 "---------------------------
+"
+
+
+
 "dein.vim
 if &compatible
     set nocompatible
 endif
-set runtimepath+=~/.vim/repos/dein.vim
+" Set Dein base path (required)
+let s:dein_base = '/Users/piyonosato/.local/share/dein'
 
-if dein#load_state('~/.vim/dein')
-  call dein#begin(expand('~/.vim/dein'))
+" Set Dein source path (required)
+let s:dein_src = '/Users/piyonosato/.local/share/dein/repos/github.com/Shougo/dein.vim'
+
+" Set Dein runtime path (required)
+execute 'set runtimepath+=' . s:dein_src
+
+
+if dein#load_state(s:dein_base)
+  " Call Dein initialization (required)
+  call dein#begin(s:dein_base)
+  
+  call dein#add(s:dein_src)
 
   "--------------------------
   " color
@@ -100,8 +115,8 @@ if dein#load_state('~/.vim/dein')
         \ 'component': {
         \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
         \ },
-        \ 'separator': {'left': '⮀', 'right': '⮂'},
-        \ 'subseparator': {'left': '⮁', 'right': '⮃'}
+        \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+        \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
         \}
 
   "HTMLタグなどの囲まれているものの編集補助
@@ -275,9 +290,13 @@ if dein#load_state('~/.vim/dein')
 
   call dein#end()
   call dein#save_state()
+
+  " Uncomment if you want to install not-installed plugins on startup.
+  if dein#check_install()
+   call dein#install()
+  endif
 endif
 
-"---------------------------                                                                                                                                                                                                          [65/347]
 "base setting
 "---------------------------
 "カラースキーマを設定
@@ -285,6 +304,11 @@ colorscheme koehler
 
 "カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
+
+set t_Co=256
+
+set guifont=Hack\ Nerd\ Font\ Mono
+
 "Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_runnning")
     "シンタックスハイライトを有効にする
@@ -393,3 +417,6 @@ let g:astro_typescript = 'enable'
 
 "ファイルタイプ関連を有効にする
 filetype plugin indent on
+
+
+
